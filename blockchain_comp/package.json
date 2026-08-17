@@ -1,0 +1,23 @@
+{
+  "name": "afb-audit-anchor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ancrage on-chain (Hardhat) du hash-chain du journal d'audit Afriland First Bond — tamper-evidence externe et publiquement verifiable.",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "anchor:local": "hardhat run scripts/anchor.js --network localhost",
+    "anchor:sepolia": "hardhat run scripts/anchor.js --network sepolia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "pg": "^8.11.0"
+  }
+}

@@ -1,0 +1,24 @@
+lorsque l'agent effectue une modification 
+de statut adjudication partiel ou totale , 
+avant que sa soit valider , une notification 
+est envoyez au superviseur sur son espace de 
+connection ou elle valide , l'operation avant que 
+sa n'apparaisse chez le client et retire les terme ,
+ comme DEPOX  INTRA ouP2 ,CSFT,DFT/DRI,AIF , 
+  P02 tous ce qui n'a rien a faire la  on doit 
+  aussi pouvoir cliquer sur le profil pour que sa
+   apparaissent , l'agent lorsqu'il cree un compte
+    un mot de passe par default est genere automatique 
+    et envoyez par mail ou SMs  client , ajoute un espace
+     pour l'admin ou il peut configurer les parametre smtp
+      ou pour le SERVEUR OTP , ou les otp serons generez
+       aleatoirement et stocké dans le BD puis comparer
+        ensuite ne pourrons plus etre utiliser une fois
+         passé en validez , donc on doit avoir 4 profils
+          qui doivent ce connect superviseur pour voir et
+           valider les adjudication et toutes les tache 
+           des agents en plus , les agents le operations 
+           courantes, les administrateur de la plateforme pour cree les profils des diferents utilisateurs , et voir les logs d'audit les autres non , chaque ne doit voir que les menus qui le concerne masquer tous les autres , en creans les admin ne peuvent pas faire des adjuducation seule le parcous agent et validation par les superviseurs le peuvent , l'admin en creant un profils doit definir un mot de passe qui sera modifier a la première connexion du l'agent du superviseur , les client eux ne doit pas voir le menus de leur profils juste leur nom numeros de telephone et numeros de compte ,ce sont ces infos pour cree un compte ces tous
+
+
+retire toutes les informations technique sur la plateforme , TLS, AES , retire la fonction permetant de crée un compte titre par le client , le superviseur et l'admin doivent recevoir une notification pour publication ,et avoir la possibilite de publié toutes les emission en mode brouillon grace a un boutton, mettre les actions dans un menus deroulant 

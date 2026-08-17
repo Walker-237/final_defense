@@ -1,0 +1,15 @@
+node_modules
+dist
+.angular
+*.zip
+test
+src/**/*.spec.ts
+.git
+.gitignore
+.vscode
+.editorconfig
+.prettierrc
+*.log
+*.md
+Dockerfile
+.dockerignore

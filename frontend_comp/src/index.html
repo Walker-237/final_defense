@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Afriland First Bond — Plateforme SVT</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- CSP en defense-in-depth : doublonne la CSP renvoyée par le serveur Express.
+       script-src est en mode NONCE (plus de 'unsafe-inline') : le serveur SSR
+       remplace NG_CSP_NONCE_PLACEHOLDER par une valeur aléatoire par requête. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-NG_CSP_NONCE_PLACEHOLDER' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" type="image/png" href="Logo_Afriland.png">
+</head>
+<body>
+  <!-- ngCspNonce : Angular appose ce nonce sur ses scripts inline (hydratation,
+       event-replay). Le serveur remplace le placeholder à chaque requête. -->
+  <app-root ngCspNonce="NG_CSP_NONCE_PLACEHOLDER"></app-root>
+</body>
+</html>

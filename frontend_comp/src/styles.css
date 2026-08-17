@@ -1,0 +1,195 @@
+@import 'tailwindcss';
+
+/* Détection explicite des templates : l'auto-détection Tailwind v4 s'appuie sur
+   la racine git, absente ici (projet hors dépôt git / contexte de build Docker).
+   Sans cette ligne, aucune classe utilitaire n'est générée → page non stylée. */
+@source "./**/*.{html,ts}";
+
+@theme {
+  --color-afb-red: #c8102e;
+  --color-afb-red-dark: #9a0c23;
+  --color-afb-red-light: #fde8ec;
+}
+
+html {
+  /* overflow-x: clip sur <html> uniquement — empêche le scroll horizontal sans
+     créer de nouveau bloc contenant pour les éléments fixed (contrairement à
+     overflow:hidden sur <body> qui casse position:fixed dans Chrome). */
+  overflow-x: clip;
+  height: 100%;
+}
+body {
+  height: 100%;
+  /* PAS de overflow-x ici — Chrome traite body comme viewport de scroll,
+     ce qui ferait positionner la sidebar fixed par rapport au body et non
+     au viewport, provoquant un affichage décousu. */
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  background-color: #f3f4f8;
+  /* Fond de marque Afriland en filigrane global (siège + masque), déjà très
+     clair : affiché directement, sans voile, derrière toutes les pages. Les
+     cartes/tableaux sont opaques et restent parfaitement lisibles par-dessus.
+     Variante AVEC pied de page « www.afrilandfirstbank.com » disponible :
+     remplacer par url('/bank-illustration3.jpg'). */
+  background-image: url('/bank-illustration.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #0f172a;
+}
+
+/* ──────────────────── BOUTONS ──────────────────── */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-150 shadow-sm;
+}
+.btn-primary {
+  @apply bg-afb-red text-white hover:bg-afb-red-dark active:scale-95;
+  box-shadow: 0 2px 8px rgba(200,16,46,0.30);
+}
+.btn-primary:hover { box-shadow: 0 4px 14px rgba(200,16,46,0.40); }
+.btn-outline {
+  @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400;
+}
+.btn-ghost { @apply text-gray-600 hover:bg-gray-100; }
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 active:scale-95;
+  box-shadow: 0 2px 8px rgba(220,38,38,0.25);
+}
+.btn-success {
+  @apply bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95;
+  box-shadow: 0 2px 8px rgba(5,150,105,0.25);
+}
+
+/* ──────────────────── CARTES ──────────────────── */
+.card {
+  @apply bg-white rounded-2xl border border-gray-200;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  transition: box-shadow 0.15s;
+}
+.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06); }
+.card-header {
+  @apply px-6 py-4 border-b border-gray-100 flex items-center justify-between;
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+  border-radius: 1rem 1rem 0 0;
+}
+.card-body { @apply p-6; }
+
+/* ──────────────────── FORMULAIRES ──────────────────── */
+.input, .select, .textarea {
+  @apply w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-white text-sm
+         focus:outline-none focus:ring-2 focus:ring-afb-red/30 focus:border-afb-red transition-all;
+}
+.input:focus, .select:focus, .textarea:focus {
+  box-shadow: 0 0 0 3px rgba(200,16,46,0.10);
+}
+.label { @apply block text-sm font-semibold text-gray-700 mb-1.5; }
+.hint { @apply text-xs text-gray-500 mt-1; }
+
+/* ──────────────────── BADGES ──────────────────── */
+.badge { @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold; }
+
+/* Codes couleur statuts d'ordre — CSFT §5.2 */
+.badge-soumis         { background:#FFF8E1; color:#92660D; border:1px solid #F9A825; }
+.badge-enverification { background:#E3F2FD; color:#0D47A1; border:1px solid #90CAF9; }
+.badge-enattenteadj   { background:#E8EAF6; color:#283593; border:1px solid #9FA8DA; }
+.badge-totalretenu    { background:#E8F5E9; color:#1B5E20; border:1px solid #A5D6A7; }
+.badge-partielretenu  { background:#FFF3E0; color:#B65500; border:1px solid #FFCC80; }
+.badge-nonretenu      { background:#FFEBEE; color:#B71C1C; border:1px solid #EF9A9A; }
+.badge-annule         { background:#F5F5F5; color:#424242; border:1px solid #BDBDBD; }
+
+/* Statuts d'émission */
+.badge-brouillon { background:#F3F4F6; color:#374151; border:1px solid #D1D5DB; }
+.badge-publie    { background:#DCFCE7; color:#14532D; border:1px solid #86EFAC; }
+.badge-cloture   { background:#F5F5F5; color:#424242; border:1px solid #BDBDBD; }
+.badge-archive   { background:#ECEFF1; color:#455A64; border:1px solid #B0BEC5; }
+
+/* ──────────────────── TABLEAUX ──────────────────── */
+.table { @apply w-full text-sm text-left; }
+.table thead { background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f7 100%); }
+.table thead { @apply text-gray-600 text-xs uppercase tracking-wider; }
+.table th { @apply px-4 py-3.5 font-bold; }
+.table td { @apply px-4 py-3 border-t border-gray-100; }
+.table tbody tr { transition: background 0.1s; }
+.table tbody tr:hover { background: linear-gradient(135deg, #fff5f6 0%, #fef7f8 100%); }
+
+/* ──────────────────── NAVIGATION LATÉRALE ──────────────────── */
+.sidebar-link {
+  @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 transition-all duration-150;
+}
+.sidebar-link:hover { background: linear-gradient(135deg, #f3f4f6 0%, #f9fafb 100%); color: #374151; }
+.sidebar-link.active {
+  background: linear-gradient(135deg, #fde8ec 0%, #fef0f2 100%);
+  color: #c8102e;
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 #c8102e;
+}
+
+/* ──────────────────── KPI / STATISTIQUES ──────────────────── */
+.kpi {
+  @apply bg-white rounded-2xl p-4 sm:p-5 flex flex-col gap-1;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 8px 28px rgba(0,0,0,0.06);
+}
+.kpi-label { @apply text-[11px] sm:text-xs uppercase tracking-widest text-gray-400 font-semibold; }
+.kpi-value { @apply text-xl sm:text-2xl font-black text-gray-900; }
+.kpi-trend { @apply text-xs text-emerald-600 font-medium; }
+
+/* ──────────────────── UTILITAIRES ──────────────────── */
+.table-wrap { @apply overflow-x-auto -mx-4 sm:mx-0; }
+.table-wrap > table { @apply min-w-[720px] sm:min-w-full; }
+
+/* Séparateur accentué */
+.divider-afb {
+  height: 3px;
+  background: linear-gradient(90deg, #c8102e 0%, #f87171 50%, #c8102e 100%);
+  border-radius: 2px;
+}
+
+/* Page header avec dégradé subtil */
+.page-header {
+  background: linear-gradient(135deg, #ffffff 0%, #fdf8f9 100%);
+  border-bottom: 2px solid #f3e8ea;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+}
+
+/* ──────────────────── DOCUMENTS HTML (convention) ────────────────────
+   Rendu du HTML stocké en base et injecté via [innerHTML] (convention de
+   compte-titres). Le preflight Tailwind remet titres et listes à plat ; le
+   plugin @tailwindcss/typography n'étant pas installé, les classes « prose »
+   ne s'appliquaient pas et le document s'affichait en bloc informe. On
+   définit donc ici le strict nécessaire à un document lisible. */
+.doc-html { color: #374151; font-size: 0.875rem; line-height: 1.65; }
+.doc-html h1 {
+  font-size: 1.25rem; font-weight: 700; color: #111827;
+  margin: 0 0 0.85rem; text-align: center;
+}
+.doc-html h2 {
+  font-size: 1.05rem; font-weight: 700; color: #111827;
+  margin: 1.6rem 0 0.55rem; padding-bottom: 0.25rem; border-bottom: 1px solid #e5e7eb;
+}
+.doc-html h3 { font-size: 0.95rem; font-weight: 600; color: #1f2937; margin: 1.15rem 0 0.35rem; }
+.doc-html h4 { font-size: 0.875rem; font-weight: 600; color: #374151; margin: 0.95rem 0 0.3rem; }
+.doc-html p { margin: 0 0 0.7rem; text-align: justify; }
+.doc-html ul { list-style: disc; margin: 0 0 0.8rem; padding-left: 1.35rem; }
+.doc-html ol { list-style: decimal; margin: 0 0 0.8rem; padding-left: 1.35rem; }
+.doc-html li { margin: 0 0 0.35rem; }
+.doc-html strong { font-weight: 600; color: #111827; }
+.doc-html em { font-style: italic; }
+.doc-html hr { margin: 1.4rem 0; border: 0; border-top: 1px solid #e5e7eb; }
+.doc-html table { width: 100%; border-collapse: collapse; margin: 0 0 0.8rem; }
+.doc-html th, .doc-html td { border: 1px solid #e5e7eb; padding: 0.4rem 0.5rem; text-align: left; }
+
+@media print {
+  aside, header, .no-print, afb-toasts { display: none !important; }
+  main { padding: 0 !important; }
+  body, html { background: white !important; }
+  .card { border: none !important; box-shadow: none !important; }
+  .print-area { padding: 0 !important; }
+}
